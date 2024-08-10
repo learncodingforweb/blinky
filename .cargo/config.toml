@@ -1,0 +1,24 @@
+[target.'cfg(all(target_arch = "arm", target_os = "none"))']
+runner = [
+    "probe-rs",
+    "run",
+    "--chip",
+    "STM32F750V8Tx",
+    "--log-format",
+    "{L} {s}",
+]
+
+rustflags = [
+    "-C",
+    "link-arg=-Tlink.x",
+    "-C",
+    "link-arg=-Tdefmt.x",
+    "-C",
+    "link-arg=--nmagic",
+]
+
+[build]
+target = "thumbv7em-none-eabihf"
+
+[env]
+DEFMT_LOG = "trace"
